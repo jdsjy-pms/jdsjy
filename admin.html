@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员工作台</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+    <div class="box">
+        <div class="box-content"></div>
+    
+        <h1>管理员工作台</h1>
+
+        <div class="section">
+            <h2>实时政策和编制要求通知</h2>
+            <div class="form-group">
+                <input type="text" id="policy-title" placeholder="政策标题">
+                <div class="file-upload-container">
+                    <label for="policy-file" class="file-upload-label">
+                        <i class="fas fa-file-upload"></i> 选择政策文件
+                    </label>
+                    <input type="file" id="policy-file" class="file-upload-input" accept=".pdf,.doc,.docx,.txt">
+                    <div id="policy-file-name" class="file-name-display"></div>
+                </div>
+                <button id="add-policy">添加政策</button>
+            </div>
+            <div id="policies-list"></div>
+        </div>
+
+        <div class="section">
+            <h2>规范图集</h2>
+            <div class="form-group">
+                <input type="text" id="standard-title" placeholder="规范标题">
+                <div class="file-upload-container">
+                    <label for="standard-file" class="file-upload-label">
+                        <i class="fas fa-file-upload"></i> 选择规范文件
+                    </label>
+                    <input type="file" id="standard-file" class="file-upload-input" accept=".pdf,.doc,.docx,.txt">
+                    <div id="standard-file-name" class="file-name-display"></div>
+                </div>
+                <button id="add-standard">添加规范</button>
+            </div>
+            <div id="standards-list"></div>
+        </div>
+
+        <div class="section">
+            <h2>内部工程参考</h2>
+            <p>编制方项目成果提交后自动存入</p>
+            <div id="references-list"></div>
+        </div>
+
+        <div class="section">
+            <h2>统一模板</h2>
+            <div class="form-group">
+                <input type="text" id="template-name" placeholder="模板名称">
+                <div class="file-upload-container">
+                    <label for="template-file" class="file-upload-label">
+                        <i class="fas fa-file-upload"></i> 选择模板文件
+                    </label>
+                    <input type="file" id="template-file" class="file-upload-input" accept=".docx,.pdf,.xlsx">
+                    <div id="template-file-name" class="file-name-display"></div>
+                </div>
+                <button id="add-template">添加模板</button>
+            </div>
+            <div id="templates-list"></div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 文件选择处理
+            document.querySelectorAll('.file-upload-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    const fileNameDisplay = document.getElementById(this.id.replace('file', 'file-name'));
+                    if (this.files.length > 0) {
+                        fileNameDisplay.textContent = this.files[0].name;
+                        fileNameDisplay.classList.add('file-selected');
+                    } else {
+                        fileNameDisplay.textContent = '';
+                        fileNameDisplay.classList.remove('file-selected');
+                    }
+                });
+            });
+
+            // 加载存储的政策
+            loadItems('policies', 'policies-list', 'policy');
+            // 加载存储的规范
+            loadItems('standards', 'standards-list', 'standard');
+            // 加载存储的模板
+            loadItems('templates', 'templates-list', 'template');
+
+            // 添加政策功能
+            document.getElementById('add-policy').addEventListener('click', function() {
+                handleFileUpload('policy', 'policies', 'policy-title', 'policy-file');
+            });
+
+            // 添加规范功能
+            document.getElementById('add-standard').addEventListener('click', function() {
+                handleFileUpload('standard', 'standards', 'standard-title', 'standard-file');
+            });
+
+            // 添加模板功能
+            document.getElementById('add-template').addEventListener('click', function() {
+                handleFileUpload('template', 'templates', 'template-name', 'template-file');
+            });
+
+            // 文件上传处理函数
+            function handleFileUpload(itemType, storageKey, titleId, fileId) {
+                const titleInput = document.getElementById(titleId);
+                const fileInput = document.getElementById(fileId);
+                const title = titleInput.value.trim();
+
+                if (!title) {
+                    alert('请输入标题');
+                    return;
+                }
+
+                if (fileInput.files.length === 0) {
+                    alert('请选择文件');
+                    return;
+                }
+
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const content = e.target.result;
+                    const items = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+                    items.push({
+                        id: Date.now(),
+                        title: title,
+                        fileName: file.name,
+                        content: content,
+                        type: file.type,
+                        size: file.size,
+                        date: new Date().toLocaleString()
+                    });
+
+                    localStorage.setItem(storageKey, JSON.stringify(items));
+
+                    // 重置表单
+                    titleInput.value = '';
+                    fileInput.value = '';
+                    document.getElementById(titleId.replace('title', 'file-name')).textContent = '';
+
+                    // 重新加载列表
+                    loadItems(storageKey, storageKey + '-list', itemType);
+
+                    alert(`成功添加 ${title}`);
+                };
+
+                reader.readAsDataURL(file);
+            }
+
+            // 加载项目函数
+            function loadItems(key, containerId, itemType) {
+                let items = JSON.parse(localStorage.getItem(key)) || [];
+                const container = document.getElementById(containerId);
+
+                if (items.length === 0) {
+                    container.innerHTML = `<p>暂无${key.replace('ies','y')}信息</p>`;
+                    return;
+                }
+
+                let html = '<ul class="item-list">';
+                items.forEach(item => {
+                    html += `
+                    <li>
+                        <div class="item-header">
+                            <strong>${item.title}</strong>
+                            <span class="file-meta">
+                                <i class="fas fa-file"></i> ${item.fileName}
+                                (${formatFileSize(item.size)})
+                            </span>
+                            <span class="date">${item.date}</span>
+                        </div>
+                        <div class="file-preview">
+                            <iframe src="${item.content}" class="file-preview-content" style="width:100%; height:200px;"></iframe>
+                        </div>
+                        <button class="remove-item" data-key="${key}" data-id="${item.id}">移除</button>
+                    </li>`;
+                });
+                html += '</ul>';
+                container.innerHTML = html;
+
+                // 添加移除功能
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const key = this.getAttribute('data-key');
+                        const id = parseInt(this.getAttribute('data-id'));
+
+                        let items = JSON.parse(localStorage.getItem(key)) || [];
+                        items = items.filter(item => item.id !== id);
+                        localStorage.setItem(key, JSON.stringify(items));
+
+                        loadItems(key, key + '-list', key.replace('ies','y').replace('s',''));
+                    });
+                });
+            }
+
+            // 文件大小格式化
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+        });
+    </script>
+    </div>
+</body>
+</html>

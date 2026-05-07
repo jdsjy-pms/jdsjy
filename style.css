@@ -1,0 +1,235 @@
+/* ===== 基础重置 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f0f2f5;
+  min-height: 100vh;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+/* ===== 全局容器 ===== */
+.google-container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ===== 页眉 ===== */
+.app-header {
+  margin-bottom: 40px;
+}
+
+.app-header h2 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #8a8f98;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  justify-content: center;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  font-weight: 500;
+  color: #1b1c1d;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-size: 13px;
+  color: #b0b4bc;
+  letter-spacing: 2px;
+}
+
+/* ===== 登录卡片容器（横向排列） ===== */
+.login-container {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+/* ===== 单张登录卡片 ===== */
+.login-card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+  padding: 32px 28px;
+  width: 280px;
+  text-align: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.login-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* 图标 */
+.icon-container {
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+.icon-container svg {
+  color: #0064fa;
+}
+
+/* 标题 */
+.login-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1b1c1d;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+/* 表单 */
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  background: #fafafa;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  justify-content: center;
+}
+
+.login-card input:focus {
+  outline: none;
+  border-color: #0064fa;
+  box-shadow: 0 0 0 2px rgba(0, 100, 250, 0.1);
+  background: #fff;
+  justify-content: center;
+}
+
+.login-card input::placeholder {
+  color: #bfbfbf;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: #0064fa;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login-card button:hover {
+  background: #0052cc;
+}
+
+/* ===== 页脚 ===== */
+.app-footer {
+  font-size: 12px;
+  color: #b0b4bc;
+  text-align: center;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 860px) {
+  .login-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+/* 盒子样式：和你截图完全一致的边界 */
+.box {
+    width: 100%;
+    height: fixed;
+
+    /* 内边距：左右 600px */
+    padding: 0 600px;
+
+    /* 边框 */
+    border: 1px solid #ccc;
+
+    /* 外边距 */
+    margin: 200px 0;
+    background-color: #ffffff;
+}
+
+.box-content {
+    background-color: #c2dcf0;
+    padding: 30px 0;
+    text-align: center;
+    height: fit-content;
+    width: 100%;
+}
+
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 20px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* 所有单元格通用样式 */
+.data-table td {
+  padding: 6px 8px;
+  border: 0cap solid #ccc;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+/* 输入框铺满单元格 */
+.data-table input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px 6px;
+}
+
+/* ======================
+   在这里设置每一列宽度！
+====================== */
+.data-table td:nth-child(1) { width: 8%; } /* 第1列 */
+.data-table td:nth-child(2) { width: 8%; } /* 第2列 */
+.data-table td:nth-child(3) { width: 12%; } /* 第3列 */
+.data-table td:nth-child(4) { width: 10%; } /* 第4列（数字） */
+.data-table td:nth-child(5) { width: 9%; } /* 第5列 */
+.data-table td:nth-child(6) { width: 15%; } /* 第6列 */
+.data-table td:nth-child(7) { width: 15%; } /* 第7列 */
+.data-table td:nth-child(8) { width: 15%; } /* 第8列 */
+.data-table td:nth-child(9) { width: 8%; } /* 第9列（删除按钮） */

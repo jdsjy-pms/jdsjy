@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客户端工作台</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <h1>客户端工作台</h1>
+
+        <div class="section">
+            <h2>项目相关资料录入</h2>
+            <table id="project-table" CLASS="data-table">
+                <thead>
+                    <tr>
+                        <th>范围</th>
+                        <th>建筑</th>
+                        <th>内容</th>
+                        <th>工程量</th>
+                        <th>单位</th>
+                        <th>改造要求</th>
+                        <th>相关改造现状</th>
+                        <th>改造后达到水平</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 初始3行空白行 -->
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="number"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><button class="delete-row" style="background: var(--notion-button-red); color: rgb(0, 0, 0);">删除</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="number"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><button class="delete-row" style="background: var(--notion-button-red); color: rgb(0, 0, 0);">删除</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="number"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><button class="delete-row" style="background: var(--notion-button-red); color: rgb(0, 0, 0);">删除</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-actions">
+                <button id="add-row">添加行</button>
+                <button id="submit-data">提交</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>自存资料</h2>
+            <table id="materials-table">
+                <thead>
+                    <tr>
+                        <th>文件</th>
+                        <th>备注</th>
+                        <th>私密</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="table-actions">
+                <input type="file" id="file-upload">
+                <input type="text" id="file-comments" placeholder="填写备注">
+                <button id="add-file">添加文件</button>
+                <button id="submit-materials">提交</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

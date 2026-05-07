@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目管理系统</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="google-container">
+        <header class="app-header">
+            <H2>山东建筑大学设计集团有限公司</H2>
+            <h1>项目管理系统</h1>
+            <p class="tagline">高效协同 · 专业管理 · 安全可靠</p>
+        </header>
+
+        <div class="login-container">
+            <div class="login-card">
+                <div class="icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-4.208 12.61C4.095 10.903 5.468 10 8 10s3.905.903 4.208 1.61A7 7 0 0 0 8 1z"/>
+                    </svg>
+                </div>
+                <h2 class="login-title">客户端</h2>
+                <form id="client-login">
+                    <input type="text" placeholder="用户名" required>
+                    <input type="password" placeholder="密码" required>
+                    <button type="submit">登录</button>
+                </form>
+            </div>
+
+            <div class="login-card">
+                <div class="icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h7.5zm-3 0A.5.5 0 0 1 11.5 5v3.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.354 3.354a.5.5 0 0 1-.708 0L7.393 8.05a.5.5 0 0 1 .708-.707L10.5 9.756V5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M14 14V4.707l-3 3L8.5 5.207V5h-1v.207L5 7.707l-3-3V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1zM8.5 8.707 11 11.199v-2.94l-1 .993v2.94l-1.5-1.5zm-1 0L5 11.199V8.255l-1-.993v2.94l2.5 2.5z"/>
+                    </svg>
+                </div>
+                <h2 class="login-title">编制方</h2>
+                <form id="editor-login">
+                    <input type="text" placeholder="用户名" required>
+                    <input type="password" placeholder="密码" required>
+                    <button type="submit">登录</button>
+                </form>
+            </div>
+
+            <div class="login-card">
+                <div class="icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M5 4a1 1 0 0 0-1 1v1H1.5a.5.5 0 0 0 0 1H2v2H.5a.5.5 0 0 0 0 1H2v2H1.5a.5.5 0 0 0 0 1H2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1h-1.5a.5.5 0 0 0 0-1H13V9h1.5a.5.5 0 0 0 0-1H13V6h1.5a.5.5 0 0 0 0-1H13a1 1 0 0 0-1-1zM6 4h4v8H6z"/>
+                    </svg>
+                </div>
+                <h2 class="login-title">管理人员</h2>
+                <form id="admin-login">
+                    <input type="text" placeholder="用户名" required>
+                    <input type="password" placeholder="密码" required>
+                    <button type="submit">登录</button>
+                </form>
+            </div>
+        </div>
+
+        <footer class="app-footer">
+            <p>© 2026 项目管理系统 | 采用端到端加密技术保障数据安全</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
